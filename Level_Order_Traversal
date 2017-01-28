@@ -1,0 +1,88 @@
+//Level Order Traversal Without using Java Collection
+//import java.util.Queue;
+import java.util.LinkedList;
+ 
+/* Class to represent Tree node */
+class Node {
+    int data;
+    Node left, right;
+ 
+    public Node(int item) {
+        data = item;
+        left = null;
+        right = null;
+    }
+}
+//this class form the link of queue
+class Link{
+	Node node;
+	Link next;
+	Link(Node node){
+		this.node = node;
+		next = null;
+	}
+} 
+//this class is used to create a queue
+class LinkList{
+	Link head,tail;
+	LinkList(){
+		head=tail=null;
+	}
+	public Node popfront(){
+		if(head==null)
+			return null;
+		Node node = head.node;
+		head = head.next;
+		if(head==null)
+			tail = null;
+		return node;
+	}
+	public void pushBack(Node node){
+		Link link = new Link(node);
+		link.next = null;
+		if(tail==null)
+			head=tail=link;
+		else{
+			tail.next = link;
+			tail = link;
+		}
+	}
+	public boolean isEmpty(){
+		if(head==null)
+			return true;
+		return false;
+	}
+}
+/* Class to print Level Order Traversal */
+class BinaryTree {
+ 
+    Node root;
+	
+   BinaryTree(){
+	   root = null;
+   }
+   public void levelOrder(){
+	   LinkList queue = new LinkList();
+	   queue.pushBack(root);
+	   while(!queue.isEmpty()){
+		   Node tmp = queue.popfront();
+		   System.out.print(tmp.data+" ");
+		   if(tmp.left!=null)
+			   queue.pushBack(tmp.left);
+		   if(tmp.right!=null)
+			   queue.pushBack(tmp.right);
+	   }
+   }
+    
+ 
+    public static void main(String args[]) 
+    {
+       BinaryTree tree = new BinaryTree();//create a binary tree
+	   tree.root = new Node(1);
+	   tree.root.left = new Node(2);
+	   tree.root.right = new Node(3);
+	   tree.root.left.left = new Node(4);
+	   tree.root.left.right = new Node(5);
+	   tree.levelOrder();
+    }
+}
