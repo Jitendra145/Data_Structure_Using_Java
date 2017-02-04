@@ -1,0 +1,97 @@
+
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+    int size;
+    int pos;
+    int [] A;
+    Solution(int size){
+        this.size = size;
+        pos = 0;
+        A = new int[size];
+    }
+    public void Insert(int v){
+        if(pos==0){
+            A[pos] = v;
+            pos = pos + 1;
+        }else{
+            if(pos==A.length){
+                A = doublesize(A);
+            }
+            A[pos] = v;
+            BottomUp(pos);
+            pos++;
+        }
+    }
+    
+    public int [] doublesize(int [] A){
+        int [] ds = new int[A.length*2];
+        for(int i=0;i<A.length;i++)
+            ds[i] = A[i];
+        return ds;
+    }
+    public void BottomUp(int i){
+        int p = (i-1)/2;
+        if(A[p]>A[i]){
+            swap(p,i);
+            BottomUp(p);
+        }
+    }
+    public void Delete(int v){
+        int index=0;
+        for(int i=0;i<pos;i++){
+            if(A[i]==v){
+                index = i;
+                break;
+            }
+        }
+        swap(index,pos-1);
+        pos = pos-1;
+        BottomDown(index);
+    }
+    
+    public void BottomDown(int i){
+        int l = 2*i+1;
+        int r = 2*i+2;
+        int largest = i;
+        if(l<pos&&A[l]<A[i])
+            largest = l;
+        if(r<pos&&A[r]<A[largest])
+            largest = r;
+        if(largest!=i){
+            swap(i,largest);
+                BottomDown(largest);
+        }
+    }
+    public void swap(int i,int j){
+        int tmp = A[i];
+        A[i] = A[j];
+        A[j] = tmp;
+     }
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner in = new Scanner(System.in);
+        int q = in.nextInt();
+        int t,v;
+        Solution o = new Solution(20);
+        for(int i=1;i<=q;i++){
+            t = in.nextInt();
+            if(t==1){
+                v = in.nextInt();
+                o.Insert(v);
+            }
+            else if(t==2){
+                v = in.nextInt();
+                o.Delete(v);
+            }
+            else if(t==3){
+                System.out.println(o.A[0]);
+            }
+        }
+    }
+}
