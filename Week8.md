@@ -1,2 +1,2 @@
-# Heaps: Binary Heap, Questions based on heaps.
-# Graphs: Types of Graphs, BFS, DFS, Cycle Detection, Connected Components, Bipartite Graph
+# Recursion and Backtracking: Backtracking questions, n queen, rat, knight etc.
+# Dynamic Programming: Properties (Top Down, Bottom Up, Optimal Substructures, Overlapping Subproblems).
