@@ -12,6 +12,7 @@ q3 = n / 3
 q2 = n / 2
 
 The number n is prime if -- and only if -- none of the q's, as derived above, are whole numbers.
+
 **Seive Of Eratosthenes:**
 
 **GCD:** In mathematics, the greatest common divisor (gcd) of two or more integers, which are not all zero, is the largest positive integer that divides each of the integers. For example, the gcd of 8 and 12 is 4.
